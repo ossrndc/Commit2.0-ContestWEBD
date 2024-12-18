@@ -1,3 +1,4 @@
+let currentSong = new Audio();
 async function getSongs(){
     let x = await fetch("http://127.0.0.1:5500/songs/")
     let response = await x.text();
@@ -12,6 +13,14 @@ async function getSongs(){
     }
     return songs
 }
+const playMusic = (track) => {
+    // let audio = new Audio("/songs/" + track)/
+    currentSong.src = "/songs/" + track
+    currentSong.play()
+    play.src = "pause.svg"
+    document.querySelector(".songInfo").innerHTML = track;
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+}
 async function main(){
     let songs = await getSongs()
     console.log(songs)
@@ -24,15 +33,33 @@ async function main(){
                                 </div>
                                 <img class="invert" src="play.svg" alt=""></li>`;
     }
-    // play the first song
-    var audio = new Audio(songs[0]);
-    audio.play();
 
-    audio.addEventListener("loadeddata", () => {
-        let duration = audio.duration;
-        console.log(audio.duration,audio.currentSrc,audio.currentTime)
-        // The duration variable now holds the duration (in seconds) of the audio clip
-    });        
+    // Attach an event listener to each song
+    Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach(e => {
+        e.addEventListener("click",element => {
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
+        })
+    })
+    // Attach an event listener to play, next and previous
+    play.addEventListener("click", () => {
+        if(currentSong.paused){
+            currentSong.play()
+            play.src = "pause.svg"
+        }
+        else{
+            currentSong.pause()
+            play.src = "play.svg"
+        }
+    })
+    // // play the first song
+    // var audio = new Audio(songs[0]);
+    // audio.play();
+    // // HTML audio element 
+    // audio.addEventListener("loadeddata", () => {
+    //     let duration = audio.duration;
+    //     console.log(audio.duration,audio.currentSrc,audio.currentTime)
+    //     // The duration variable now holds the duration (in seconds) of the audio clip
+    // });        
 }
 main();
 
