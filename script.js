@@ -1,4 +1,5 @@
 let currentSong = new Audio();
+let songs;
 function formatTime(totalSeconds) {
     totalSeconds = Math.max(0, Math.floor(totalSeconds)); // Ensure no negative time
     const minutes = Math.floor(totalSeconds / 60);
@@ -30,7 +31,7 @@ const playMusic = (track,pause=false) => {
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 }
 async function main(){
-    let songs = await getSongs()
+    songs = await getSongs()
     playMusic(songs[0],true)
     console.log(songs)
     let songUl = document.querySelector(".songslist").getElementsByTagName("ul")[0]
@@ -90,6 +91,25 @@ async function main(){
     // add an event listener to close hamburger
     document.querySelector(".close").addEventListener("click",() =>{
         document.querySelector(".left").style.left = "-100%"
+    })
+    document.getElementById("prev").addEventListener("click",() => {
+        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+        if((index-1)>=0){
+            playMusic(songs[index-1])
+        }
+    })
+    document.getElementById("next").addEventListener("click",() => {
+        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+        console.log(index)
+        if((index+1)<songs.length){
+            playMusic(songs[index+1])
+        }
+        else{
+            playMusic(songs[0])
+        }
+    })
+    document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change",(e) => {
+        currentSong.volume = (e.target.value)/100
     })
 }
 main();

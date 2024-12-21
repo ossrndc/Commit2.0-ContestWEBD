@@ -270,6 +270,20 @@ button {
 .close{
     display: none;
 }
+.songInfo{
+    width: 370px;
+}
+.timevol{
+    display: flex;
+    gap: 10px;
+}
+.rangvol{
+    display: flex;
+}
+.range input{
+    height: 4px;
+    width: 70px;
+}
 @media only screen and (max-width: 1300px) {
     .left {
       position: absolute;
@@ -299,7 +313,7 @@ button {
     .spotifyPlaylist{
         width: 100vw;
     }
-    .playbar{
+    .playbar{  
         width: 88vw;
         font-size: 14px;
     }
@@ -402,5 +416,17 @@ button {
     .card:hover .play{
         opacity: 1;
         transform: translateY(-80px); 
+    }
+    .songInfo{
+        width: auto;
+    }
+    .timevol{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .rangvol{
+        display: flex;
+        gap: 10px;
     }
   }
