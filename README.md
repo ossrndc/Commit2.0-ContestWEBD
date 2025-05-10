@@ -71,9 +71,9 @@ This is a beginner-friendly project aimed at encouraging open source contributio
 ________________________________________
 ## 💬 Join the Community
 Need help or want to discuss your approach?
-DM on whatsapp
-Join our [Instagram handle]  →  https://www.instagram.com/team__oss/?hl=enJoin 
-Connect with us on linkedin-> https://www.linkedin.com/company/team-oss/ 
+- DM on whatsapp
+- Join our [Instagram handle]  →  https://www.instagram.com/team__oss/?hl=enJoin 
+- Connect with us on linkedin-> https://www.linkedin.com/company/team-oss/ 
 ________________________________________
 ## ⭐ Don't forget to Star the repo!
 If you like the project and want more such contests, give this repo a ⭐️!
