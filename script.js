@@ -189,4 +189,4 @@ play.addEventListener("click", () => {
 main();
 
 let html  = document.getElementsByClassName("search-container")[0]
-html.innerHTML = html.innerHTML + `<input type="text" class="search-input" placeholder="What do you want to play?">`
+html.innerHTML = html.innerHTML + `<input type="text" class=" text-white " placeholder="What do you want to play?">`
