@@ -24,11 +24,8 @@ header {
     position: relative;
     margin-top: 6px;
 }
-.hero{
-    position: absolute;
-    top: 12px;
-    left: 50px;
-    z-index: 1;
+.parent-of-hero{
+    position: relative;
 }
 .kang{
     position: relative;
