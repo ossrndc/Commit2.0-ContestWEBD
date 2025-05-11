@@ -3,11 +3,13 @@ let songs;
 let currentFolder;
 let isPlaying = false;
 let sNN = [];
-
+// here I had listed name of all the folders
 const folders = ['ncs', 'Ashiqui', 'cs'];
+//created a key to use
 const storr_ke = 'musicPlayerState';
+//a had made a default volume
 const def_vol = 10;
-
+// Here it is to access time
 function formatTime(totalSeconds) {
     totalSeconds = Math.max(0, Math.floor(totalSeconds)); 
     const minutes = Math.floor(totalSeconds / 60);
@@ -35,7 +37,7 @@ async function getSongs(folder) {
             sNN.push(song);
             const songName = song.replaceAll("%20", " ");
             songUl.innerHTML += 
-                `<li>
+                `<li tabindex="0">
                     <img class="invert" src="svg/song.svg" alt="">
                     <div class="info"><div>${songName}</div></div>
                     <img class="invert" src="svg/play.svg" alt="">
@@ -45,8 +47,15 @@ async function getSongs(folder) {
         document.querySelectorAll(".songslist ul li").forEach((li, i) => {
             li.addEventListener("click", () => {
                 let sname = sNN[i];
-             
                 playMusic(currentFolder, sname); 
+            });
+            
+            // Added keyboard support for song items (Enter key)
+            li.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    let sname = sNN[i];
+                    playMusic(currentFolder, sname);
+                }
             });
         });
 
@@ -54,7 +63,6 @@ async function getSongs(folder) {
 
     } catch (err) {
         console.error("we encounter  error:", err);
-      
     }
 }
 // Here is the function that play the song where cf is current folder ,sn is song name,and pause is checker ,it set src and play if not pause or pause  if not
@@ -90,7 +98,7 @@ async function displayAlbums() {
                 let metadata = await res.json(); 
 
                 cards.innerHTML += 
-                    `<div data-folder="${folder}" class="card">
+                    `<div data-folder="${folder}" class="card" tabindex="0">
                         <div class="img">
                             <img class="img w-[100%] h-40" src="songs/${folder}/cover.jpg" alt="Album cover">
                             <div class="play">
@@ -107,9 +115,17 @@ async function displayAlbums() {
         Array.from(document.getElementsByClassName("card")).forEach(e => {
             e.addEventListener("click", async item => {
                 let folder = item.currentTarget.dataset.folder;
-                console.log(folder);
                 songs = await getSongs(folder);
                 svingstat();
+            });
+            
+            // Added keyboard support for album cards (Enter key)
+            e.addEventListener('keydown', async (e) => {
+                if (e.key === 'Enter') {
+                    let folder = e.currentTarget.dataset.folder;
+                    songs = await getSongs(folder);
+                    svingstat();
+                }
             });
         });
 
@@ -136,7 +152,7 @@ function svingstat() {
 }
 // This is mainly a functional that handles the final playing of the song as it firstly either get data from local str or froms system ,set volume and accordingly adjust the element inside it in terms of functionality ,Hangle song load,Handle Play,Handle Next,Handle Previous ,Handle Song Duation
 async function main() {
- 
+    // Load saved state or use defaults
     const savedState = JSON.parse(localStorage.getItem(storr_ke)) || {
         currentFolder: "ncs",
         curentsngIndx: 0,
@@ -144,7 +160,7 @@ async function main() {
         isMuted: false
     };
 
-  
+    // Set initial volume
     currentSong.volume = savedState.volume / 100;
     document.querySelector(".range input").value = savedState.volume;
     
@@ -160,8 +176,8 @@ async function main() {
     await getSongs(savedState.currentFolder);
 
     if (songs && songs.length > 0) {
-        const songIndex = Math.min(savedState.curentsngIndx, songs.length - 1);
-        playMusic(savedState.currentFolder, songs[songIndex], true);
+        const sInd = Math.min(savedState.curentsngIndx, songs.length - 1);
+        playMusic(savedState.currentFolder, songs[sInd], true);
     }
 // Diplayin folder cardd
     displayAlbums();
@@ -179,6 +195,45 @@ async function main() {
         }
         svingstat();
     });
+    
+    // Added global keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Spacebar to toggle play/pause
+        if (e.code === 'Space') {
+            e.preventDefault();
+            if (isPlaying) {
+                currentSong.pause();
+                play.src = "svg/play.svg";
+                isPlaying = false;
+            } else {
+                currentSong.play();
+                play.src = "svg/pause.svg";
+                isPlaying = true;
+            }
+            svingstat();
+        }
+        
+        // Right arrow for next song
+        if (e.key === 'ArrowRight') {
+            let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
+            if ((index + 1) < songs.length) {
+                playMusic(currentFolder, songs[index + 1]);
+            } else {
+                playMusic(currentFolder, songs[0]);
+            }
+        }
+        
+        // Left arrow for previous song
+        if (e.key === 'ArrowLeft') {
+            let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
+            if ((index - 1) >= 0) {
+                playMusic(currentFolder, songs[index - 1]);
+            } else {
+                playMusic(currentFolder, songs[songs.length - 1]);
+            }
+        }
+    });
+
 // Dynamically updating the time when the song is playing along with updating of range
     currentSong.addEventListener("timeupdate", () => {
         if (!isNaN(currentSong.duration)) {
@@ -191,10 +246,16 @@ async function main() {
         play.src = "svg/play.svg";
         isPlaying = false;
         svingstat();
+        
+        // Auto-play next song when current ends
+        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
+        if ((index + 1) < songs.length) {
+            playMusic(currentFolder, songs[index + 1]);
+        }
     });
 // if error
     currentSong.addEventListener("error", () => {
-        alert("Failed to load the audio file.");
+        console.log('No found')
     });
 // Set song duration as per the changing value of the seekbar
     document.querySelector(".seekbar").addEventListener("click", e => {
@@ -219,7 +280,7 @@ async function main() {
             playMusic(currentFolder, songs[songs.length - 1]);
         }
     });
-    
+    //whenever i will be clicking next then next song will start 
     document.getElementById("next").addEventListener("click", () => {
         //Taking the name of the song by spliting the source in two array and taking first
         let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0]);
@@ -248,7 +309,54 @@ async function main() {
         svingstat();
     });
 //I am dynamacially inserting the input tag here
-    document.querySelector(".search-container").innerHTML += `<input type="text" id="searchInput" class="text-white" placeholder="What do you want to play?">`;
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.id = 'searchInput';
+    searchInput.className = 'text-white';
+    searchInput.placeholder = 'What do you want to play?';
+    searchInput.tabIndex = 0;
+    document.querySelector(".search-container").appendChild(searchInput);
+
+    // Added search functionality (Enter key)
+    searchInput.addEventListener('keydown', async (e) => {
+        if (e.key === 'Enter') {
+            const searchTerm = searchInput.value.toLowerCase();
+            if (!searchTerm) return;
+            
+            // Search through all folders
+            for (const folder of folders) {
+                try {
+                    const res = await fetch(`songs/${folder}/info.json`);
+                    if (!res.ok) continue;
+                    
+                    const metadata = await res.json();
+                    const foundSong = metadata.songs.find(song => 
+                        song.toLowerCase().includes(searchTerm)
+                    );
+                    
+                    if (foundSong) {
+                        await getSongs(folder);
+                        const sInd = songs.indexOf(foundSong);
+                        // Just to insure that i wouldnt be facinf break
+                        if (sInd !== -1) {
+                            playMusic(folder, foundSong);
+                            // Scroll to the song in the list
+                            const songElements = document.querySelectorAll(".songslist ul li");
+                            if (songElements[sInd]) {
+                            // Whenever certain song name will be found it will go to that li scroll to that
+                                songElements[sInd].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                            return;
+                        }
+                    }
+                } catch (err) {
+                    console.warn(`It is not in the list  ${folder}:`, err);
+                }
+            }
+            
+            alert('Here it is not matching song found');
+        }
+    });
 
     //    it is here to Save state when song starts playing
     currentSong.addEventListener('play', () => {
