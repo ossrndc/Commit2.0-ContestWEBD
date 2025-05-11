@@ -56,7 +56,7 @@ ________________________________________
 ________________________________________
 ## 📅 Contest Timeline
 🗓️ Start Date: 11/05/2025  
-🗓️ Start Time: 10:00 AM
+🗓️ Start Time: 11:00 AM
 🗓️ End Time: 11:59 PM -- 12/05/2025 
 📢 Winners Announcement: Will be announced soon on instagram & whatsapp announcements
 ________________________________________
