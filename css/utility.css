@@ -56,3 +56,8 @@
 .cursor{
     cursor: pointer;
 }
+.icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
