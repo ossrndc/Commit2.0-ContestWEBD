@@ -35,8 +35,8 @@ header {
 .search-container input {
     background-color: rgb(41,41,41);
     border: none;
-    color: rgb(42,42,42);
-    font-weight: bolder;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
     font-weight: 600;
     font-size: 16px;
     padding: 16px 70px;
@@ -243,6 +243,7 @@ button {
     width: 67vw;
     background-color: rgb(58, 223, 116);
     bottom: 0;
+    color: rgba(0, 0, 0, 0.992);
 }
 .seekbar{
     position: absolute;
