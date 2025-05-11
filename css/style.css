@@ -173,20 +173,21 @@ button {
 }
 .cards {
     display: flex;
-    gap: 5px;
-    /* height: 60vh; */
-    max-height: 60vh;
-    overflow-y: auto;
     flex-wrap: wrap;
+    gap: 16px; /* increased gap for better spacing */
+    justify-content: flex-start; /* aligns items to the left */
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .card {
-    font-weight: 400;
-    width: 170px;
-    border-radius: 2px;
-    /* overflow: visible; */
-    line-height: 18px;
-    object-fit: contain;
+    width: calc(25% - 16px); /* 4 cards per row, adjust as needed */
+    min-width: 150px;
+    background-color: #1f1f1f;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .card p {
