@@ -1,6 +1,8 @@
 let currentSong = new Audio();
 let songs;
 let currentFolder;
+let isPlaying = false;
+
 function formatTime(totalSeconds) {
     totalSeconds = Math.max(0, Math.floor(totalSeconds)); // Ensure no negative time
     const minutes = Math.floor(totalSeconds / 60);
@@ -41,16 +43,22 @@ async function getSongs(folder){
     })
     songs
 }
-const playMusic = (track,pause=false) => {
-    // let audio = new Audio("/songs/" + track)/
-    currentSong.src = `/${currentFolder}/` + track
-    if(!pause){
-        currentSong.play()
-        play.src = "svg/pause.svg" 
-    }
+//Fixed play pause issue
+const playMusic = (track, pause = false) => {
+    currentSong.src = `/${currentFolder}/` + track;
     document.querySelector(".songInfo").innerHTML = decodeURI(track);
-    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
-}
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
+
+    if (!pause) {
+        currentSong.play();
+        play.src = "svg/pause.svg";
+        isPlaying = true;
+    } else {
+        play.src = "svg/play.svg";
+        isPlaying = false;
+    }
+};
+
 async function displayAlbums() {
     let x = await fetch(`/songs/`)
     let response = await x.text();
@@ -93,16 +101,18 @@ async function main(){
     displayAlbums()
     
     // Attach an event listener to play, next and previous
-    play.addEventListener("click", () => {
-        if(currentSong.paused){
-            currentSong.play()
-            play.src = "svg/pause.svg"
-        }
-        else{
-            currentSong.pause()
-            play.src = "svg/play.svg"
-        }
-    })
+play.addEventListener("click", () => {
+    if (isPlaying) {
+        currentSong.pause();
+        play.src = "svg/play.svg";
+        isPlaying = false;
+    } else {
+        currentSong.play();
+        play.src = "svg/pause.svg";
+        isPlaying = true;
+    }
+});
+
     
     // // play the first song
     // var audio = new Audio(songs[0]);
@@ -114,11 +124,18 @@ async function main(){
     //     // The duration variable now holds the duration (in seconds) of the audio clip
     // });        
 
-    // add events for timeupdate
+    // Here is the edited by me
     currentSong.addEventListener("timeupdate", () => {
-        document.querySelector(".songtime").innerHTML = `${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`
-        document.querySelector(".circle").style.left = (currentSong.currentTime/currentSong.duration)*100 + "%";
-    })
+        document.querySelector(".songtime").innerHTML = `${formatTime(currentSong.currentTime)}/${formatTime(currentSong.duration)}`;
+        document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
+    });
+
+  
+    currentSong.addEventListener("ended", () => {
+        play.src = "svg/play.svg";
+        isPlaying = false;
+    });
+
     // add an event listener to seekbar
     // getBoundingClientRect() -> ham page par kkaha hai woh batata hai
     document.querySelector(".seekbar").addEventListener("click", e => {
@@ -172,4 +189,4 @@ async function main(){
 main();
 
 let html  = document.getElementsByClassName("search-container")[0]
-html.innerHTML = html.innerHTML + `<input type="text" class="search-input" placeholder="What do you want to play?">`
+html.innerHTML = html.innerHTML + `<input type="text" class=" text-white " placeholder="What do you want to play?">`
