@@ -9,6 +9,7 @@ function formatTime(totalSeconds) {
 }
 async function getSongs(folder){
     currentFolder = folder;
+    try {
     let x = await fetch(`/${folder}/`)
     let response = await x.text();
     let div = document.createElement("div")
@@ -40,6 +41,10 @@ async function getSongs(folder){
         })
     })
     songs
+    } catch (error) {
+        console.log(error)
+        alert(error)
+    }
 }
 const playMusic = (track,pause=false) => {
     // let audio = new Audio("/songs/" + track)/
@@ -52,7 +57,8 @@ const playMusic = (track,pause=false) => {
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 }
 async function displayAlbums() {
-    let x = await fetch(`/songs/`)
+    try {
+        let x = await fetch(`/songs/`)
     let response = await x.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -82,6 +88,10 @@ async function displayAlbums() {
             
         })
     })
+    } catch (error) {
+        console.log(error)
+        alert(error)
+    }
     // return songs
 }
 async function main(){
