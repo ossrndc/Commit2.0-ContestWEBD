@@ -1,4 +1,9 @@
 {
     "title" : "Copyright Songs",
-    "description" : "Romantic songs for you"
+    "description" : "Romantic songs for you",
+    "songs":[
+        "Ankit Tiwari - Sunn Raha Hai (Male Version).mp3",
+        "Arijit Singh & Palak Muchhal  - Chahun Main Ya Naa.mp3",
+        "Arijit Singh & Palak Muchhal - Meri Aashiqui.mp3"
+    ]
 }

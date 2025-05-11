@@ -1,4 +1,11 @@
 {
-    "title" : "Copyright Songs",
-    "description" : "songs for you"
+  "title": "Copyright Songs",
+  "description": "songs for you",
+  "songs": [
+
+    "01_Brown_Rang_-_Yo_Yo_Honey_Singh_-_128Kbps_-_www.DjPunjab.Com.mp3",
+    "06_Diljit_Dosanjh_-_Fukre_Na_-_Jaz_Dhami_-_128Kbps_-_www.DjPunjab.Com.mp3",
+    "Blue_Eyes_-_Yo_Yo_Honey_Singh_-_128Kbps_-_www.DjPunjab.Com.mp3",
+    "Desi_Kalakaar_-_Yo_Yo_Honey_Singh_-_128Kbps_-_www.DjPunjab.Com.mp3"
+  ]
 }
