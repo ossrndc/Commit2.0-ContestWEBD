@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
     margin: 0;
     padding: 0;
@@ -40,7 +39,7 @@ header {
 .search-container input {
     background-color: rgb(41,41,41);
     border: none;
-  
+    width: 40vw;
     font-weight: bolder;
     font-weight: 600;
     font-size: 16px;
@@ -88,14 +87,16 @@ button {
     display: flex;
 } */
 .left {
-    width: 28vw;
+    width: 27vw;
     height: 80vh;
+    scrollbar-width: none;
     position: relative;
     overflow: hidden;
+    margin-right: 1vw;
 }
 
 .right {
-    min-width: 72vw;
+    min-width: 71vw;
     max-height: 80vh;
     position: relative;
     background-color: rgb(18, 18, 18);
@@ -144,6 +145,7 @@ button {
 }
 .songslist{
     height: 45vh;
+    scrollbar-width: none;
     overflow-y: scroll;
 }
 .songslist ul{
@@ -247,9 +249,7 @@ button {
     border-radius: 25px;
     width: 67vw;
     background-color: rgb(58, 223, 116);
-    bottom: 2px;
-    left: 38px;
-
+    bottom: 0;
 }
 .seekbar{
     position: absolute;
@@ -315,11 +315,9 @@ button {
         min-height: 90vh;
     }
     .playbar{  
-       position: absolute;
-        width: 92%;
+        width: 92vw;
         height: 12vh;
-        font-size: 14px;
-        left: 20px;
+        font-size: 20px;
     }
     .close{
         display: block;
@@ -354,19 +352,14 @@ button {
     .right{
         top: 20px;
         min-height: 90vh;
-        position: relative;
     }
     .spotifyPlaylist{
         width: 100vw;
     }
     .playbar{  
-       position: absolute;
-        width: 92%;
+        width: 92vw;
         height: 12vh;
         font-size: 14px;
-      
-        left: 20px;
-     
     }
     .seekbar{
         width: 90%;
@@ -387,6 +380,8 @@ button {
     }
     .search-container input {
         font-size: 12px;
+        width: 50vw;
+        height: 6vh;
         padding: 0px 25px;
         border-radius: 25px;
     }
@@ -397,7 +392,7 @@ button {
     }
     .sign {
         margin-top: 18px;
-        height: 12px;
+        height: 15px;
         font-size: 12px;
         padding: 8px 11px;
         border-radius: 15px;
@@ -408,7 +403,7 @@ button {
     }
     .log {
         margin-top: 18px;
-        height: 12px;
+        height: 15px;
         font-size: 12px;
         padding: 8px 11px;
         border-radius: 15px;
@@ -422,22 +417,21 @@ button {
     }
     .kang img{
         margin-top: 3px;
-        width: 23px;
-      
+        width: 24px;
+        /* display: none; */
         margin-left: 10px;
     }
     .hero{
         position: absolute;
-        top: 7px;
-        width: 15px;
+        width: 24px;
         display: block;
+        left: 60px;
         margin-left: -10px;
-        margin-bottom: 4px;
     }
     header {
         height: 5vh;
         display: flex;
-      
+        /* justify-content: space-between; */
     }
     .buttons{
         display: flex;
@@ -450,8 +444,9 @@ button {
         padding: 0px;
     }
     .card{
-        width: 300px;
-        height: 390px;
+     
+        width: 350px;
+        height: 420px;
     }
     .card img{
         object-fit: contain;

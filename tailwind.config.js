@@ -1,11 +1,11 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './index.html',
-    './**/*.{js,html}'
+    "./**/*.html",
+    "./**/*.js",    // Correct forward slashes
+    "!./node_modules/**/*" // Exclude node_modules
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
