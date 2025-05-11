@@ -63,7 +63,7 @@ async function displayAlbums() {
             const e = array[index];
 
         if(e.href.includes("/songs/")){
-            let folder = (e.href.split("/").slice(-2)[1])
+            let folder = (e.href.split("/").slice(-2)[0])
             // Get the meta deta of the folder
             let x = await fetch(`/songs/${folder}/info.json`)
             let response = await x.json();
