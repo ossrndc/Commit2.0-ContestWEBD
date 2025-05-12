@@ -203,7 +203,7 @@ button {
     background-color: rgb(31, 31, 31);
     border-radius: 5px;
 }
-.card .img {
+.card img {
     position: relative;
 }
 .play{
