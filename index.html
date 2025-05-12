@@ -2,104 +2,282 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spotify - Web Player: Music for everyone</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Flow+Circular&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/utility.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spotify - Web Player</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background-color: #121212;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .search-container {
+      flex: 1;
+      margin: 0 1rem;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      border: none;
+      background-color: #282828;
+      color: white;
+      font-size: 14px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .sign, .log {
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .sign {
+      background: transparent;
+      color: #b3b3b3;
+    }
+
+    .log {
+      background: #fff;
+      color: #000;
+    }
+
+    main {
+      display: flex;
+      height: calc(100vh - 132px);
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: #000;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .library h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .library ul {
+      list-style: none;
+      padding: 0;
+      color: #b3b3b3;
+      font-size: 14px;
+    }
+
+    .library li {
+      margin: 0.5rem 0;
+    }
+
+    .content {
+      flex: 1;
+      background-color: #121212;
+      padding: 1.5rem;
+      overflow-y: auto;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card {
+      width: 180px;
+      background-color: #181818;
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 1rem;
+      color: #fff;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .card p {
+      margin-top: 0.5rem;
+      font-size: 14px;
+      color: #b3b3b3;
+    }
+
+    .playbar {
+      background-color: #181818;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .song-info {
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .controls button {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .controls img {
+      height: 24px;
+      width: 24px;
+    }
+
+    .progress {
+      font-size: 12px;
+      color: #b3b3b3;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      .content {
+        padding: 1rem;
+      }
+
+      .cards {
+        justify-content: center;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
 </head>
 
-<body class="flow-cp">
-    <header>
-        <div class="logo">
-            <img class="invert" src="svg/logo.svg" alt="logo" />
-        </div>
-        <div class="search-container">
-            
-            <span class="kang"><img class="invert" width="30px" height="30px" src="svg/home.svg" alt="home"></span>
-        
-            <img class="hero invert" width="25px" height="25px" src="svg/search.svg" alt="search">
-        </div>     
-        <div class="buttons">
-            <button class="sign flow-cp">Sign up</button>
-            <button class="log flow-cp">Log in</button>
-        </div>
-    </header>
-    <main>
-        <div class="container overflow flex">
-            <div class="left border">
-                <div class="library">
-                    <div class="heading flex flow-cp">
-                        <img class="invert" width="28px" height="22px" src="svg/library.svg" alt="" />
-                        <h2>Your Library</h2>
-                        <img class="close invert" src="svg/close.svg" alt="">
-                    </div>
-                        <div class="songslist">
-                            <ul>
-                               
-                            </ul>
-                        </div>
-                    <div class="footer">
-                        <div class="link "><a href="https://www.spotify.com/in-en/legal/"><span>Legal</span></a></div>
-                        <div class="link"><a href="https://www.spotify.com/in-en/safetyandprivacy/"><span>Safety &amp; Privacy Center</span></a></div>
-                        <div class="link"><a href="https://www.spotify.com/in-en/legal/privacy-policy/"><span>Privacy Policy</span></a></div>
-                        <div class="link"><a href="https://www.spotify.com/in-en/legal/cookies-policy/"><span>Cookies</span></a></div>
-                        <div class="link"><a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3"><span>About Ads</span></a></div>
-                        <div class="link"><a href="https://www.spotify.com/in-en/accessibility/"><span>Accessibility</span></a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="right border">
-                <div class="spotifyPlaylist p-1">
-                    <div class="ham">
-                        <img class="hamburger invert" src="svg/hamburger.svg" alt="">
-                        <h1>Spotify Playlists</h1>
-                    </div>
-                    <div class="cards p-1">
-                        </div>
-                        
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="logo" />
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="What do you want to play?">
+    </div>
+    <div class="buttons">
+      <button class="sign">Sign up</button>
+      <button class="log">Log in</button>
+    </div>
+  </header>
 
-                        <div class="playbar">
-                            <div class="seekbar">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="abovebar">
-                                <div class="songInfo">
-                                    
-                                </div>
-                                <div class="songbtns flex justify-center">
-                                    <img width="25px" class="cursor" id="prev" src="svg/prev.svg" alt="">
-                                    <img width="25px" id="play" src="svg/play.svg" alt="">
-                                    <img width="25px" class="cursor" id="next" src="svg/next.svg" alt="">
-                                </div>
-                                <div class="timevol">
-                                    <div class="songtime">
-                                        
-                                    </div>
-                                    <div class="rangvol">
-                                    <div class="volume"><img src="svg/volume.svg" alt=""></div>
-                                    
-                                    <div class="range">
-                                        <input type="range" name="range" id="">
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <main>
+    <aside class="sidebar">
+      <div class="library">
+        <h2>Your Library</h2>
+        <ul>
+          <li>Liked Songs</li>
+          <li>Imaryanwhoareyou</li>
+          <li>Badmoshi</li>
+        </ul>
+      </div>
+    </aside>
+
+    <section class="content">
+      <h2 class="section-title">Made For aryannn</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="https://i.scdn.co/image/ab6761610000e5eb68fe5ec812e420fc6b05df0a" alt="Mix 1">
+          <p>Daily Mix 01</p>
         </div>
-    </main>
-    <script src="script.js"></script>
+        <div class="card">
+          <img src="https://i.scdn.co/image/ab6761610000e5eb893b5a0c0321a2f4e1d92ffb" alt="Mix 2">
+          <p>Daily Mix 02</p>
+        </div>
+        <div class="card">
+          <img src="https://i.scdn.co/image/ab6761610000e5ebb3d97a7c8d848f2d680f4c9a" alt="Mix 3">
+          <p>Daily Mix 03</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="playbar">
+    <div class="song-info">Aankhein Khuli</div>
+    <div class="controls">
+      <button onclick="alert('Prev')">
+        <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" alt="Previous">
+      </button>
+      <button onclick="togglePlay()" id="playBtn">
+        <img id="playIcon" src="https://cdn-icons-png.flaticon.com/512/727/727245.png" alt="Play">
+      </button>
+      <button onclick="alert('Next')">
+        <img src="https://cdn-icons-png.flaticon.com/512/727/727243.png" alt="Next">
+      </button>
+    </div>
+    <div class="progress">4:24 / 7:03</div>
+  </div>
+
+  <script>
+    const playBtn = document.getElementById("playBtn");
+    const playIcon = document.getElementById("playIcon");
+    let isPlaying = false;
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      playIcon.src = isPlaying
+        ? "https://cdn-icons-png.flaticon.com/512/727/727245.png"
+        : "https://cdn-icons-png.flaticon.com/512/727/727243.png";
+    }
+  </script>
 </body>
 
 </html>
-
-
-
