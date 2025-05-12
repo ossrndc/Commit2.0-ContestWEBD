@@ -8,10 +8,16 @@ html,body {
     color: white;
 }
 
-header {
+/* header {
     height: 8vh;
     display: flex;
     justify-content: space-between;
+} */
+
+header {
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px;
 }
 
 .logo img {
@@ -82,7 +88,7 @@ button {
 /* main{
     display: flex;
 } */
-.left {
+/* .left {
     width: 28vw;
     height: 80vh;
     position: relative;
@@ -94,7 +100,17 @@ button {
     max-height: 80vh;
     position: relative;
     background-color: rgb(18, 18, 18);
+} */
+
+.left {
+    width: 100%;
+    max-width: 320px;
 }
+
+.right {
+    width: 100%;
+}
+
 .ham{
     display: flex;
 }
@@ -273,12 +289,11 @@ button {
 .close{
     display: none;
 }
-.songInfo{
-    width: 200px; /* Adjust the width as needed */
-    white-space: nowrap; /* Prevent wrapping */
-    overflow: hidden; /* Hide the overflowing text */
-    text-overflow: ellipsis; /*for elipses*/
+.songInfo {
+    min-width: 0;
+    flex-shrink: 1;
 }
+
 
 .timevol{
     display: flex;
@@ -295,49 +310,26 @@ button {
     height: 4px;
     width: 70px;
 }
-@media only screen and (max-width: 1300px) {
-    .left {
-      position: absolute;
-      transition: all 0.3s;
-      left: -100%;
-      z-index: 1;
-      width: 333px;
-    }
-    .right{
-        width: 100vw;
-        min-height: 90vh;
-    }
-    .playbar{  
-        width: 92vw;
-        height: 12vh;
-        font-size: 20px;
-    }
-    .close{
-        display: block;
-    }
-    .cards{
-        justify-content: center;
-        padding: 0px;
-    }
-    .card{
-        width: 300px;
-        height: 390px;
-    }
-    .card img{
-        object-fit: contain;
-        width: 300px;
-        height: 350px;
-    }
-    .card p {
-        font-size: 16px;
-        color: grey;
-    }
-    .abovebar{
+@media only screen and (max-width: 480px) {
+    .buttons {
         flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        align-items: flex-start;
+    }
+    .card {
+        width: 90vw;
+        height: auto;
+    }
+    .card img {
+        width: 100%;
+        height: auto;
+    }
+    .search-container input {
+        width: 80vw;
+        padding: 10px 15px;
+        font-size: 14px;
     }
 }
+
 @media only screen and (max-width: 680px) {
     .close{
         display: block;
@@ -349,11 +341,14 @@ button {
     .spotifyPlaylist{
         width: 100vw;
     }
-    .playbar{  
-        width: 92vw;
-        height: 12vh;
-        font-size: 14px;
-    }
+ .playbar {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+}
+
     .seekbar{
         width: 90%;
     }
