@@ -178,6 +178,7 @@ button {
 }
 
 .card {
+    position: relative;
     font-weight: 400;
     width: 170px;
     border-radius: 2px;
