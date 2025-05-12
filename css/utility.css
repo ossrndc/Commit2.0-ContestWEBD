@@ -1,58 +1,73 @@
-.border{
+/* General utility classes for layout and design */
+
+.border-radius-10 {
     border-radius: 10px;
     margin: 5px;
 }
-.flex{
+
+.flex {
     display: flex;
 }
-.justify-center{
+
+.justify-center {
     justify-content: center;
 }
-.items-center{
+
+.items-center {
     align-items: center;
 }
-.invert{
+
+.invert {
     filter: invert(1);
 }
-.flow-cp {
+
+.font-roboto-bold {
     font-family: "Roboto", serif;
     font-weight: 700;
     font-style: normal;
-}  
-.color{
-    background-color: rgb(40,40,40);
 }
-.m-1{
+
+.bg-dark {
+    background-color: rgb(40, 40, 40);
+}
+
+.margin-5 {
     margin: 5px;
 }
-.p-1{
+
+.padding-10 {
     padding: 10px;
 }
-.overflow{
+
+.overflow-visible {
     overflow: visible;
 }
-.hidden{
+
+.overflow-hidden {
     overflow: hidden;
 }
+
 ::-webkit-scrollbar {
-    width: 12px; /* Set the width of the scrollbar */
+    width: 12px; 
 }
 
 ::-webkit-scrollbar-track {
-    background: #333; /* Set the track (background) color */
+    background: #333; 
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #555; /* Set the thumb (slider) color */
-    border-radius: 10px; /* Optional: rounded corners for the thumb */
+    background: #555; 
+    border-radius: 10px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #888; /* Change the thumb color on hover */
+    background: #888;
 }
-.width{
+
+.width-400 {
     width: 400px;
 }
-.cursor{
+
+.cursor-pointer {
     cursor: pointer;
 }

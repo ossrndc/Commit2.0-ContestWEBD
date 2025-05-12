@@ -477,7 +477,7 @@ button {
         margin-top: -4px;
         display: flex;
         gap: 10px;
-    }
+    }}
 .songslist::-webkit-scrollbar {
     width: 8px;
 }
@@ -495,4 +495,3 @@ button {
     background: #555;
 }
 
-  }
