@@ -1,6 +1,7 @@
-* {
+*, *::before,*::after{
     margin: 0;
     padding: 0;
+    box-sizing:border-box;
 }
 
 html,body {
@@ -12,6 +13,7 @@ header {
     height: 8vh;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .logo img {
@@ -22,11 +24,8 @@ header {
     position: relative;
     margin-top: 6px;
 }
-.hero{
-    position: absolute;
-    top: 12px;
-    left: 50px;
-    z-index: 1;
+.parent-of-hero{
+    position: relative;
 }
 .kang{
     position: relative;
@@ -35,8 +34,7 @@ header {
 .search-container input {
     background-color: rgb(41,41,41);
     border: none;
-    color: rgb(42,42,42);
-    font-weight: bolder;
+    color: beige;
     font-weight: 600;
     font-size: 16px;
     padding: 16px 70px;
@@ -49,6 +47,7 @@ button {
 }
 
 .buttons {
+    display: flex;
     margin-top: 5px;
     margin-right: 10px;
     gap: 5px;
@@ -62,9 +61,8 @@ button {
     padding: 15px 28px;
     border-radius: 25px;
 }
-.sign:hover{
-    padding: 15px 31px;
-    border-radius: 26px;
+.sign:hover {
+    background-color: #1a1a1a;
     color: white;
 }
 .log {
@@ -75,9 +73,8 @@ button {
     padding: 15px 30px;
     border-radius: 25px;
 }
-.log:hover{
-    padding: 15px 31px;
-    border-radius: 26px;
+.log:hover {
+    background-color: #e5e5e5;
 }
 /* main{
     display: flex;
@@ -181,13 +178,20 @@ button {
 }
 
 .card {
+    position: relative;
     font-weight: 400;
     width: 170px;
     border-radius: 2px;
     /* overflow: visible; */
     line-height: 18px;
-    object-fit: contain;
 }
+.card img {
+    object-fit: cover; /* or 'contain' based on your design */
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
+
 
 .card p {
     font-size: 13px;
@@ -200,7 +204,7 @@ button {
     background-color: rgb(31, 31, 31);
     border-radius: 5px;
 }
-.card .img {
+.card img {
     position: relative;
 }
 .play{
@@ -473,5 +477,21 @@ button {
         margin-top: -4px;
         display: flex;
         gap: 10px;
-    }
-  }
+    }}
+.songslist::-webkit-scrollbar {
+    width: 8px;
+}
+
+.songslist::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.songslist::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.songslist::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
